@@ -2,9 +2,6 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { logout } from '@/app/auth/actions'
 
-// Force Next.js to render this page dynamically on every request
-export const dynamic = 'force-dynamic'
-
 export default async function DashboardPage() {
   const cookieStore = await cookies()
   const session = cookieStore.get('session_user')
