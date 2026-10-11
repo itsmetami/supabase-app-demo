@@ -1,5 +1,8 @@
 import { login } from '@/app/auth/actions'
 
+// Prevents Next.js dynamic prerender blocking for searchParams
+export const instant = false
+
 export default async function LoginPage({
   searchParams,
 }: {
