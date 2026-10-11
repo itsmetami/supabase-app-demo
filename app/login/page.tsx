@@ -1,3 +1,5 @@
+import { login } from '@/app/auth/actions'
+
 export default async function LoginPage({
   searchParams,
 }: {
