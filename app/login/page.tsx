@@ -1,14 +1,15 @@
-import { login } from '@/app/auth/actions'
+'use client'
 
-// Prevents Next.js dynamic prerender blocking for searchParams
-export const instant = false
+import React, { useState } from 'react'
 
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ error?: string }>
-}) {
-  const { error } = await searchParams
+export default function LoginPage() {
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    alert(`Form submitted with Name: ${name}`)
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-6">
@@ -17,22 +18,17 @@ export default async function LoginPage({
           User Login
         </h1>
 
-        {error && (
-          <p className="mb-4 text-center text-sm font-medium text-red-600">
-            {error}
-          </p>
-        )}
-
-        <form action={login} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700" htmlFor="name">
               Name
             </label>
             <input
               id="name"
-              name="name"
               type="text"
               required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-blue-500 focus:outline-none"
               placeholder="Enter your name"
             />
@@ -44,9 +40,10 @@ export default async function LoginPage({
             </label>
             <input
               id="password"
-              name="password"
               type="password"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-1 w-full rounded-md border border-gray-300 p-2 text-sm focus:border-blue-500 focus:outline-none"
               placeholder="Enter your password"
             />
